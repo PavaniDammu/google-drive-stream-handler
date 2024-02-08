@@ -18,13 +18,8 @@ export async function downloadAndUploadVideo(req: Request, res: Response): Promi
     const downloadPromise = downloadVideo(fileId, downloadDestPath);
     const uploadPromise = await uploadVideoInChunks(downloadDestPath, uploadDestFolderId);
 
-    // // Wait for both promises to resolve
+    // Wait for both promises to resolve
     await Promise.all([downloadPromise, uploadPromise]);
- 
-    // const downloadPromise = downloadAndUploadInChunks(fileId, downloadDestPath, uploadDestFolderId);
-
-    // // Wait for both promises to resolve
-    // await Promise.all([downloadPromise]);
 
      // Respond with success
      res.status(200).json({ message: 'Download and upload successful' });
